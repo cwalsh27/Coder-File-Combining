@@ -2,3 +2,5 @@
 Place the two coder .csv files in the INPUT folder\
 Run run.bat and check the OUTPUT folder\
 To reset everything, run clear.bat (INPUT files will remain)
+
+If it's your first time running after download, run clear.bat first.
