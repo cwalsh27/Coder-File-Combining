@@ -26,6 +26,6 @@ for file in real_files:
 
 # creates the .xlsx files
 os.chdir(output_path)
-with pandas.ExcelWriter('output.xlsx') as writer:  
+with pandas.ExcelWriter('Output.xlsx') as writer:  
     dataframes[0].to_excel(writer, sheet_name='Coder 1', index = False, header = False)
     dataframes[1].to_excel(writer, sheet_name='Coder 2', index = False, header = False)

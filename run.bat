@@ -1,4 +1,5 @@
 echo off
+py clearer.py
 py input_mover.py
 cd DatavyuToSupercoder
 java -jar DatavyuToSupercoder.jar

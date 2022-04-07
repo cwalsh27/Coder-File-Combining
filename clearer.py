@@ -1,8 +1,6 @@
 import os
 import glob
 
-clear_input = input("Clear input files? y/n")
-
 path = os.getcwd()
 
 dts_input_path = path + "/DatavyuToSuperCoder/Input/"
@@ -34,7 +32,3 @@ os.chdir(input_path)
 input_ignore = glob.glob(os.path.join(input_path, "*txt"))
 if input_ignore:
     os.remove(input_ignore[0])
-if clear_input.lower() == "y":
-    input_files = glob.glob(os.path.join(input_path, "*csv"))
-    for file in input_files:
-        os.remove(file)
