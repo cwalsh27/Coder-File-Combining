@@ -1,4 +1,4 @@
-echo off
+@echo off
 py rerunner.py True
 cd Facetalk
 py catcher.py
