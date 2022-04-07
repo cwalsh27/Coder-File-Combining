@@ -6,6 +6,7 @@ java -jar DatavyuToSupercoder.jar
 cd ..
 py copier.py
 cd Facetalk
+py catcher.py
 py facetalk.py
 cd ..
 py output_mover.py
