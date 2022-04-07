@@ -19,8 +19,8 @@ for sheet in wb:
     b = 0
     s = 0
     num_rows = 0
-    begin_fill = PatternFill(start_color = 'FFD3AA',
-                              end_color = 'FF0000',
+    b_fill = PatternFill(start_color = 'FFD3AA',
+                              end_color = 'FFD3AA',
                               fill_type = 'solid')
     if sheet.title == 'AVERAGES ACROSS CODERS':
         continue
@@ -28,7 +28,9 @@ for sheet in wb:
     for row in sheet:
         if row[0].value == "B":
             b += 1
-            row[0].fill = begin_fill
+            row[0].fill = b_fill
+            sheet["M" + str(num_rows + 1)] = b
+            sheet["M" + str(num_rows + 1)].fill = b_fill
         if row[0].value == "S":
             s += 1
         num_rows += 1
