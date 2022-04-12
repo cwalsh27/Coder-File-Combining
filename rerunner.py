@@ -3,6 +3,11 @@ import glob
 import shutil
 import sys
 
+if os.name == "nt":
+    sep = "\\"
+else:
+    sep = "/"
+
 # True or false, based on if it's the first time being run in the rerun
 input = sys.argv[-1]
 
@@ -22,5 +27,5 @@ for file in output_files:
 
 # move file
 os.chdir(input_path)
-file = glob.glob(os.path.join(input_path, "*.xlsx"))[0].split("\\")[-1]
+file = glob.glob(os.path.join(input_path, "*.xlsx"))[0].split(sep)[-1]
 shutil.copyfile(file, output_path + "Output.xlsx")

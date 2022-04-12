@@ -2,6 +2,11 @@ import os
 import glob
 import pandas
 
+if os.name == "nt":
+    sep = "\\"
+else:
+    sep = "/"
+
 path = os.getcwd()
 input_path = path + "/DatavyuToSupercoder/Output"
 output_path = path + "/Facetalk/Input"
@@ -10,7 +15,7 @@ files = glob.glob(os.path.join(input_path, "*.xls"))
 # gets rid of that weird OUTPUT.DS_S file
 real_files = []
 for file in files:
-    file_name = file.split("\\")[-1]
+    file_name = file.split(sep)[-1]
     if file_name != "OUTPUT_.DS_S.xls":
         real_files.append(file_name)
 
