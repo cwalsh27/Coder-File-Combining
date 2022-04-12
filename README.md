@@ -8,4 +8,4 @@ Mac: Type bash rerun.sh in the console under the folder's directory\
 Windows: Run rerun.sh\
 Performing the previous step will undo your edits
 
-pandas, xlrd, and openpyxl are required
+Note: pandas, xlrd, and openpyxl are required
