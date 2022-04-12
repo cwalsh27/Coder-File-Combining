@@ -29,7 +29,10 @@ def error_region(i, sheet, row_num):
         error_region += str(j+1) + " "
         for cell in row[0:3]:
             if not cell.value:
-                error_region += "  "
+                if cell == row[0]:
+                    error_region += "  "
+                else:
+                    error_region += "     "
             else:
                 error_region += str(cell.value) + " "
         error_region += "\n"
@@ -53,14 +56,34 @@ for sheet in wb:
         if row[0].value == "S":
             s += 1
         row_num += 1
-    # makes sure every S has a B following it (except for the last one)
-    # also makes sure that every row has something in the first column
+        
     for i in range(0, row_num):
         row = list(sheet)[i]
+        # checks offsets and onsets
+        if list(row)[0].value in ["B", "S"]:
+            if not list(row)[1].value:
+                print(sheet.title + " missing onset look in row " + str(i+1))
+                print(error_region(i, sheet, row_num))
+                exit(1)
+            if list(row)[2].value:
+                print(sheet.title + " has offset look in row " + str(i+1))
+                print(error_region(i, sheet, row_num))
+                exit(1)
+        if list(row)[0].value in ["R", "L", "C"]:
+            if not list(row)[1].value:
+                print(sheet.title + " missing onset look in row " + str(i+1))
+                print(error_region(i, sheet, row_num))
+                exit(1)
+            if not list(row)[2].value:
+                print(sheet.title + " missing offset look in row " + str(i+1))
+                print(error_region(i, sheet, row_num))
+                exit(1)
+        # makes sure that every row has something in the first column
         if not list(row)[0].value:
             print(sheet.title + " missing look in row " + str(i+1))
             print(error_region(i, sheet, row_num))
             exit(1)
+        # makes sure every S has a B following it (except for the last one)
         if list(row)[0].value == "S" and i != row_num - 1:
             if list(sheet)[i+1][0].value != "B":
                 print(sheet.title + " has an S that isn't followed by a B in row " + str(i+1))

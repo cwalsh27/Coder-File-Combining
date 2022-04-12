@@ -100,26 +100,14 @@ def compute(application_path):
                     start_time = row[1].value #get start time
                     #print(rt_max, count)
                 elif code == 'L': #if left look
-                    if start_look == None:
-                        print('ERROR: Missing onset time in row', excel_row_count, 'Coder', coder_num, 'in file', file)
-                    if end_look == None:
-                        print('ERROR: Missing offset time in row', excel_row_count, 'Coder', coder_num, 'in file', file)
                     if row[3].value > l_max: #check if it is the longest look
                         l_max = row[3].value
                     l_sum = l_sum + row[3].value#add to sum
                 elif code == 'R': #if right look
-                    if start_look == None:
-                        print('ERROR: Missing onset time in row', excel_row_count, 'Coder', coder_num, 'in file', file)
-                    if end_look == None:
-                        print('ERROR: Missing offset time in row', excel_row_count, 'Coder', coder_num, 'in file', file)
                     if row[3].value > r_max: #check if it is the longest look
                         r_max = row[3].value
                     r_sum = r_sum + row[3].value #add to sum
                 elif code == 'C': #if center look
-                    if start_look == None:
-                        print('ERROR: Missing onset time in row', excel_row_count, 'Coder', coder_num, 'in file', file)
-                    if end_look == None:
-                        print('ERROR: Missing offset time in row', excel_row_count, 'Coder', coder_num, 'in file', file)
                     c_sum = c_sum + row[3].value #add to sum
                 elif code == 'S': #if end of trial
                     end_time = row[1].value #get end time
