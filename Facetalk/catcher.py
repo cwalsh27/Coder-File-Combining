@@ -4,10 +4,15 @@ from openpyxl import *
 from openpyxl.styles import Color, PatternFill, Font, Border
 from openpyxl.styles import colors
 
+if os.name == "nt":
+    sep = "\\"
+else:
+    sep = "/"
+
 path = os.getcwd() + "/Input/"
 
 file = glob.glob(os.path.join(path, "*xlsx"))
-file_name = file[0].split("\\")[-1]
+file_name = file[0].split(sep)[-1]
 
 os.chdir(path)
 
@@ -15,15 +20,16 @@ num_trials = 75
 
 wb = load_workbook(file_name)
 
-def error_region(i, sheet, row_num):
+def error_region(i, sheet, row_num) -> str:
     error_region = "\n"
+    # handles edge cases (literally)
     if i == 0:
         area = [i, i+1]
     elif i == row_num - 1:
         area = [i-1, i]
     else:
         area = [i-1, i, i+1]
-    # gets the relevant row and surrounding rows
+    # gets the relevant row and two surrounding rows
     for j in area:
         row = list(list(sheet)[j])
         error_region += str(j+1) + " "
@@ -46,6 +52,8 @@ for sheet in wb:
     b_fill = PatternFill(start_color = 'FFD3AA', end_color = 'FFD3AA', fill_type = 'solid')
     if sheet.title == 'AVERAGES ACROSS CODERS':
         continue
+    print("analyzing " + sheet.title)
+    # quick preiminary scan
     for row in sheet:
         if row[0].value == "B":
             b += 1
@@ -57,6 +65,7 @@ for sheet in wb:
             s += 1
         row_num += 1
         
+    # catches errors
     for i in range(0, row_num):
         row = list(sheet)[i]
         # checks offsets and onsets
