@@ -45,6 +45,7 @@ def error_region(i, sheet, row_num) -> str:
     return error_region
 
 # catches errors, highlights B cells, and indexes trials
+error = False
 for sheet in wb:
     b = 0
     s = 0
@@ -52,7 +53,7 @@ for sheet in wb:
     b_fill = PatternFill(start_color = 'FFD3AA', end_color = 'FFD3AA', fill_type = 'solid')
     if sheet.title == 'AVERAGES ACROSS CODERS':
         continue
-    print("analyzing " + sheet.title)
+    print("Analyzing " + sheet.title)
     # quick preiminary scan
     for row in sheet:
         if row[0].value == "B":
@@ -71,35 +72,37 @@ for sheet in wb:
         # checks offsets and onsets
         if list(row)[0].value in ["B", "S"]:
             if not list(row)[1].value:
-                print(sheet.title + " missing onset look in row " + str(i+1))
+                print("\n" + sheet.title + " missing onset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
-                exit(1)
+                error = True
             if list(row)[2].value:
-                print(sheet.title + " has offset look in row " + str(i+1))
+                print("\n" + sheet.title + " has offset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
-                exit(1)
+                error = True
         if list(row)[0].value in ["R", "L", "C"]:
             if not list(row)[1].value:
-                print(sheet.title + " missing onset look in row " + str(i+1))
+                print("\n" + sheet.title + " missing onset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
-                exit(1)
+                error = True
             if not list(row)[2].value:
-                print(sheet.title + " missing offset look in row " + str(i+1))
+                print("\n" + sheet.title + " missing offset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
-                exit(1)
+                error = True
         # makes sure that every row has something in the first column
         if not list(row)[0].value:
-            print(sheet.title + " missing look in row " + str(i+1))
+            print("\n" + sheet.title + " missing look in row " + str(i+1) + "\n")
             print(error_region(i, sheet, row_num))
-            exit(1)
+            error = True
         # makes sure every S has a B following it (except for the last one)
         if list(row)[0].value == "S" and i != row_num - 1:
             if list(sheet)[i+1][0].value != "B":
-                print(sheet.title + " has an S that isn't followed by a B in row " + str(i+1))
+                print("\n" + sheet.title + " has an S that isn't followed by a B in row " + str(i+1) + "\n")
                 print(error_region(i+1, sheet, row_num))
-                exit(1)
+                error = True
         # makes sure the number of trials is correct
     if b != num_trials or s != num_trials:
-        print(sheet.title + " has incorrect number of trials.\n" + str(b) + " B\n" + str(s) + " S\n" + "Should have " + str(num_trials) + " of each.")       
-        exit(1)
+        print("\n" + sheet.title + " has incorrect number of trials.\n" + str(b) + " B\n" + str(s) + " S\n" + "Should have " + str(num_trials) + " of each." + "\n")       
+        error = True
     wb.save(path + file_name)
+if error:
+    exit(1)
