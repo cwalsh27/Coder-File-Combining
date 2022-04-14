@@ -1,4 +1,7 @@
 @echo off
+echo Note: this file should only be run once per set of coder files
+echo If you want to edit the output and run again, use rerun.bat
+echo --------------------------------------------------------------
 py clearer.py
 if %errorlevel% neq 0 (
 	pause
