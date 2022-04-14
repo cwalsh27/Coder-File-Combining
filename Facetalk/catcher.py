@@ -65,13 +65,13 @@ for sheet in wb:
     print("Analyzing " + sheet.title)
     # quick preiminary scan
     for row in sheet:
-        if row[0].value == "B":
+        if row[0].value.upper() == "B":
             b += 1
             # highlights cells and indexes trials
             row[0].fill = b_fill
             sheet["M" + str(row_num + 1)] = b
             sheet["M" + str(row_num + 1)].fill = b_fill
-        if row[0].value == "S":
+        if row[0].value.upper() == "S":
             s += 1
         row_num += 1
         
@@ -79,7 +79,7 @@ for sheet in wb:
     for i in range(0, row_num):
         row = list(sheet)[i]
         # checks offsets and onsets
-        if list(row)[0].value in ["B", "S"]:
+        if list(row)[0].value.upper() in ["B", "S"]:
             if not list(row)[1].value:
                 print("\n" + sheet.title + " missing onset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
@@ -88,7 +88,7 @@ for sheet in wb:
                 print("\n" + sheet.title + " has offset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
                 error = True
-        if list(row)[0].value in ["R", "L", "C"]:
+        if list(row)[0].value.upper() in ["R", "L", "C"]:
             if not list(row)[1].value:
                 print("\n" + sheet.title + " missing onset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
