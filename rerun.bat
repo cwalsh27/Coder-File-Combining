@@ -17,7 +17,7 @@ py rerunner.py False
 if %errorlevel% neq 0 (
 	pause
 	exit)
-py bad_trials.py
+py recode_finder.py
 if %errorlevel% neq 0 (
 	pause
 	exit)
