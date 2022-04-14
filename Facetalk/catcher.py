@@ -33,13 +33,22 @@ def error_region(i, sheet, row_num) -> str:
     for j in area:
         row = list(list(sheet)[j])
         error_region += str(j+1) + " "
+        if j+1 < 100:
+            error_region += " "
+        if j+1 < 10:
+            error_region += " "
         for cell in row[0:3]:
             if not cell.value:
                 if cell == row[0]:
                     error_region += "  "
                 else:
-                    error_region += "     "
+                    error_region += "      "
             else:
+                if cell == row[1] or cell == row[2]:
+                    if cell.value < 10000:
+                        error_region += " "
+                    if cell.value < 1000:
+                        error_region += " "
                 error_region += str(cell.value) + " "
         error_region += "\n"
     return error_region
