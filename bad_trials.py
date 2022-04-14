@@ -100,11 +100,12 @@ for trial in sorted(bad_trials):
     print("\nDisagreement between coders detected in trial " + str(trial) + ":")
     print(trial_region(trial, output_wb)[:-1])
     decision = None
-    while(not decision in ("1", "2", "3")):
+    while(not decision in ("1", "2", "3", "4")):
         decision = input("""
-If you would like to add this trial to the list of recodes, press 1
-If you would like to continue without adding the trial to the list of recodes, press 2
-If you would like to stop and manually edit the data, press 3 """)
+If you would like to add this trial to the list of recodes, type 1
+If you would like to continue without adding this trial to the list of recodes, type 2
+If you would like to stop and manually edit the data, type 3
+If you would like to add all trials to the list of recodes, type 4 """)
         
     if decision == "1":
         recodes.add(trial)
@@ -114,6 +115,9 @@ If you would like to stop and manually edit the data, press 3 """)
         print("\nProcess stopped")
         exit(1)
         break
+    else:
+        recodes = bad_trials
+        break
 
 txt = "Recodes:\n"
 for trial in sorted(recodes):
@@ -121,6 +125,7 @@ for trial in sorted(recodes):
     txt += str(trial) + " (" + time + "), "
 txt = txt[:-2]    
 
+print()
 print(txt)
 
 os.chdir(input_path_1)
