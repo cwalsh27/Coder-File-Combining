@@ -9,3 +9,5 @@ if [ $? -ne 0 ]; then exit 0; fi
 cd .. 
 python3 rerunner.py False 
 if [ $? -ne 0 ]; then exit 0; fi 
+python3 recode_finder.py
+if [ $? -ne 0 ]; then exit 0; fi 

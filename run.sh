@@ -4,7 +4,7 @@ if [ $? -ne 0 ]; then exit 0; fi
 python3 input_mover.py 
 if [ $? -ne 0 ]; then exit 0; fi 
 cd DatavyuToSupercoder 
-java -jar DatavyuToSupercoder.jar
+java -jar $(pwd)/DatavyuToSupercoder.jar
 cd .. 
 python3 copier.py 
 if [ $? -ne 0 ]; then exit 0; fi 
@@ -15,4 +15,6 @@ python3 facetalk.py
 if [ $? -ne 0 ]; then exit 0; fi 
 cd .. 
 python3 output_mover.py 
+if [ $? -ne 0 ]; then exit 0; fi 
+python3 recode_finder.py
 if [ $? -ne 0 ]; then exit 0; fi 
