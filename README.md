@@ -1,5 +1,6 @@
 # FaceTalk_Combining
 Place the two coder .csv files in the INPUT folder\
+Edit the config file's 2nd and 4th lines
 Mac: Type bash run.sh in the console under the folder's directory\
 Windows: Run run.sh\
 Check the OUTPUT folder
