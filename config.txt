@@ -1,4 +1,3 @@
 Study type (facetalk, wls, excelmacros):
-awl
+
 Number of trials:
-32
