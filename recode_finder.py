@@ -9,6 +9,27 @@ if os.name == "nt":
 else:
     sep = "/"
 
+with open('config.txt') as f:
+    lines = f.readlines()
+try:
+    study = lines[1][:-1]
+except:
+    print("No study given in config file. Make sure to put the study type on the second line")
+    exit(1)
+if not study.lower() in ["facetalk", "wls", "awl"]:
+    print("Invalid study \"" + study + "\" in config file.")
+    exit(1)
+try:
+    num_trials = int(lines[3])
+except:
+    print("No number of trials in config file. Make sure to put the number of trials on the fourth line")
+    exit(1)
+
+if study in ["facetalk", "wls"]:
+    cols = 15
+elif study in ["awl"]:
+    cols = 21
+
 path = os.getcwd()
 input_path_1 = path + "/OUTPUT/"
 input_path_2 = path + "/DatavyuToSupercoder/Output/"
@@ -26,11 +47,12 @@ trial_times = trials_wb["Start Time (in elapsed time - Datavyu coding)"]
 
 bad_trials = set()
 redFill = PatternFill(start_color = 'FF0000', end_color = 'FF0000', fill_type = 'solid')
-for i in range(1, 76):
+redFill2 = PatternFill(start_color = 'FFFF0000', end_color = 'FFFF0000', fill_type = 'solid')
+for i in range(1, num_trials+1):
     row = output_sheet[i]
-    for j in range(0, 15):
+    for j in range(0, cols):
         cell = row[j]
-        if cell.fill == redFill:
+        if cell.fill == redFill or cell.fill == redFill2:
             bad_trials.add(i)
 
 print("\n" + str(len(bad_trials)) + " possible recodes found")
