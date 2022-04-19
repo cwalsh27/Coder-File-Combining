@@ -7,7 +7,7 @@ if [ $? -ne 0 ]
 then 
 	python3 facetalk.py 
 	cd .. 
-	python3 output_mover.py 
+	python3 rerunner.py False 
 	exit 0 
 
 fi 
