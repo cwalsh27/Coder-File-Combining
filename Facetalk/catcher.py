@@ -41,6 +41,7 @@ os.chdir(path)
 wb = load_workbook(file_name)
 
 def recreate_line(i, look, on, off) -> str:
+    # prints the line given the row number, look, onset, and offset
     error_row = str(i+1) + " "
     if i+1 < 10:
         error_row += " "
@@ -95,12 +96,13 @@ for sheet in wb:
     s = 0
     row_num = 0
     b_fill = PatternFill(start_color = 'FFD3AA', end_color = 'FFD3AA', fill_type = 'solid')
+    # Delete AAC sheet
     if sheet.title == 'AVERAGES ACROSS CODERS':
         wb.remove(sheet)
         wb.save(path + file_name)
         continue
     print("Analyzing " + sheet.title)
-    # quick preiminary scan
+    # quick preliminary scan
     for row in sheet:
         if row[0].value == "B":
             b += 1
@@ -124,7 +126,7 @@ for sheet in wb:
             if list(row)[2].value:
                 print("\n" + sheet.title + " has offset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
-                # delete offset for B or S
+                # suggests to delete offset for B or S
                 print("Suggested fix:")
                 print(recreate_line(i, list(row)[0].value, list(row)[1].value, ""))
                 approval = input("\nApprove fix? (y/n)")
