@@ -31,7 +31,8 @@ for file in real_files:
     coders.append(coder)
 
 # creates the .xlsx files
+name = "_".join(real_files[0].split("_")[1:-1])
 os.chdir(output_path)
-with pandas.ExcelWriter('Output.xlsx') as writer:  
+with pandas.ExcelWriter(name+'.xlsx') as writer:  
     dataframes[0].to_excel(writer, sheet_name='Coder 1 ' + coders[0], index = False, header = False)
     dataframes[1].to_excel(writer, sheet_name='Coder 2 ' + coders[1], index = False, header = False)
