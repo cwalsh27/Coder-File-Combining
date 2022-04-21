@@ -40,6 +40,21 @@ os.chdir(path)
 
 wb = load_workbook(file_name)
 
+def recreate_line(i, look, on, off) -> str:
+    error_row = str(i+1) + " "
+    if i+1 < 10:
+        error_row += " "
+    if i+1 < 100:
+        error_row += " "
+    error_row += str(look) + "  "
+    error_row += str(on) + " "
+    if on < 10000:
+        error_row +=  " "
+    if on < 1000:
+        error_row +=  " "
+    error_row += str(off)
+    return error_row
+
 def error_region(i, sheet, row_num) -> str:
     error_region = "\n"
     # handles edge cases (literally)
@@ -87,13 +102,13 @@ for sheet in wb:
     print("Analyzing " + sheet.title)
     # quick preiminary scan
     for row in sheet:
-        if row[0].value.upper() == "B":
+        if row[0].value == "B":
             b += 1
             # highlights cells and indexes trials
             row[0].fill = b_fill
             sheet["M" + str(row_num + 1)] = b
             sheet["M" + str(row_num + 1)].fill = b_fill
-        if row[0].value.upper() == "S":
+        if row[0].value == "S":
             s += 1
         row_num += 1
         
@@ -101,7 +116,7 @@ for sheet in wb:
     for i in range(0, row_num):
         row = list(sheet)[i]
         # checks offsets and onsets
-        if list(row)[0].value.upper() in ["B", "S"]:
+        if list(row)[0].value in ["B", "S"]:
             if not list(row)[1].value:
                 print("\n" + sheet.title + " missing onset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
@@ -109,8 +124,15 @@ for sheet in wb:
             if list(row)[2].value:
                 print("\n" + sheet.title + " has offset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
-                error = True
-        elif list(row)[0].value.upper() in ["R", "L", "C", "RT", "RB", "LT", "LB"]:
+                # delete offset for B or S
+                print("Suggested fix:")
+                print(recreate_line(i, list(row)[0].value, list(row)[1].value, ""))
+                approval = input("\nApprove fix? (y/n)")
+                if approval.lower() == "y":
+                    list(row)[2].value = ""
+                else:
+                    error = True
+        elif list(row)[0].value in ["R", "L", "C", "RT", "RB", "LT", "LB"]:
             if not list(row)[1].value:
                 print("\n" + sheet.title + " missing onset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
@@ -128,6 +150,11 @@ for sheet in wb:
             if list(sheet)[i+1][0].value != "B":
                 print("\n" + sheet.title + " has an S that isn't followed by a B in row " + str(i+1) + "\n")
                 print(error_region(i+1, sheet, row_num))
+                error = True
+        if list(row)[0].value == "B" and i != 0:
+            if list(sheet)[i-1][0].value != "S":
+                print("\n" + sheet.title + " has an B that isn't preceded by a S in row " + str(i+1) + "\n")
+                print(error_region(i-1, sheet, row_num))
                 error = True
     # makes sure the number of trials is correct
     if b != num_trials or s != num_trials:
