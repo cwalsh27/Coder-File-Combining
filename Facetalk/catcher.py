@@ -128,9 +128,11 @@ for sheet in wb:
                 print("Suggested fix:")
                 print(recreate_line(i, list(row)[0].value, list(row)[1].value, ""))
                 approval = input("\nApprove fix? (y/n)")
-                if approval.lower() == "y":
+                if approval in ["y", "Y", "yes", "Yes", "YES"]:
                     list(row)[2].value = ""
                 else:
+                    if approval == "cookie":
+                        print("Congrats! You win a cookie!")
                     error = True
         elif list(row)[0].value in ["R", "L", "C", "RT", "RB", "LT", "LB"]:
             if not list(row)[1].value:
