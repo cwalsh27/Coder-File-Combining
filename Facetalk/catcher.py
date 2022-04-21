@@ -3,20 +3,40 @@ import glob
 from openpyxl import *
 from openpyxl.styles import Color, PatternFill, Font, Border
 from openpyxl.styles import colors
+del open
+
+# "catcher in the py" lol
 
 if os.name == "nt":
     sep = "\\"
 else:
     sep = "/"
-
+    
 path = os.getcwd() + "/Input/"
+config_path = "/".join(os.getcwd().split(sep)[:-1])+"/"
+os.chdir(config_path)
+with open('config.txt') as f:
+    lines = f.readlines()
+try:
+    study = lines[1][:-1]
+except:
+    print("No study given in config file. Make sure to put the study type on the second line")
+    exit(1)
+if not study.lower() in ["facetalk", "wls", "awl"]:
+    print("Invalid study \"" + study[:-1] + "\" in config file.")
+    exit(1)
+try:
+    num_trials = int(lines[3])
+except:
+    print("No number of trials in config file. Make sure to put the number of trials on the fourth line")
+    exit(1)
+
+os.chdir
 
 file = glob.glob(os.path.join(path, "*xlsx"))
 file_name = file[0].split(sep)[-1]
 
 os.chdir(path)
-
-num_trials = 75
 
 wb = load_workbook(file_name)
 
@@ -61,6 +81,8 @@ for sheet in wb:
     row_num = 0
     b_fill = PatternFill(start_color = 'FFD3AA', end_color = 'FFD3AA', fill_type = 'solid')
     if sheet.title == 'AVERAGES ACROSS CODERS':
+        wb.remove(sheet)
+        wb.save(path + file_name)
         continue
     print("Analyzing " + sheet.title)
     # quick preiminary scan
@@ -88,7 +110,7 @@ for sheet in wb:
                 print("\n" + sheet.title + " has offset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
                 error = True
-        if list(row)[0].value.upper() in ["R", "L", "C"]:
+        elif list(row)[0].value.upper() in ["R", "L", "C", "RT", "RB", "LT", "LB"]:
             if not list(row)[1].value:
                 print("\n" + sheet.title + " missing onset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
@@ -97,9 +119,8 @@ for sheet in wb:
                 print("\n" + sheet.title + " missing offset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
                 error = True
-        # makes sure that every row has something in the first column
-        if not list(row)[0].value:
-            print("\n" + sheet.title + " missing look in row " + str(i+1) + "\n")
+        else:
+            print("\n" + sheet.title + " has unrecognized look in row " + str(i+1) + "\n")
             print(error_region(i, sheet, row_num))
             error = True
         # makes sure every S has a B following it (except for the last one)
@@ -108,7 +129,7 @@ for sheet in wb:
                 print("\n" + sheet.title + " has an S that isn't followed by a B in row " + str(i+1) + "\n")
                 print(error_region(i+1, sheet, row_num))
                 error = True
-        # makes sure the number of trials is correct
+    # makes sure the number of trials is correct
     if b != num_trials or s != num_trials:
         print("\n" + sheet.title + " has incorrect number of trials.\n" + str(b) + " B\n" + str(s) + " S\n" + "Should have " + str(num_trials) + " of each." + "\n")       
         error = True
