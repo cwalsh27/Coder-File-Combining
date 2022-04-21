@@ -12,7 +12,7 @@ else:
 input = sys.argv[-1]
 
 path = os.getcwd()
-if (input):
+if (eval(input)):
     input_path = path + "/OUTPUT/"
     output_path = path + "/Facetalk/Input/"
 else:
