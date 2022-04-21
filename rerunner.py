@@ -28,4 +28,4 @@ for file in output_files:
 # move file
 os.chdir(input_path)
 file = glob.glob(os.path.join(input_path, "*.xlsx"))[0].split(sep)[-1]
-shutil.copyfile(file, output_path + "Output.xlsx")
+shutil.copyfile(file, output_path + file.split("_")[0] + "_" + file.split("_")[1] + "_combined.xlsx")
