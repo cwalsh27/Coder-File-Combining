@@ -9,7 +9,7 @@ Check the OUTPUT folder\
 
 If you want to make an edit to the output and then recombine:\
 Mac: Type bash rerun.sh in the console under the folder's directory\
-Windows: Run rerun.bat\
+Windows: Run rerun.bat
 
 Note: pandas, xlrd, and openpyxl are required
 
