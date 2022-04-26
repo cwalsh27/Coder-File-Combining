@@ -11,7 +11,7 @@ java -jar $(pwd)/DatavyuToSupercoder.jar
 cd .. 
 python3 copier.py 
 if [ $? -ne 0 ]; then exit 0; fi 
-cd Facetalk 
+cd combining 
 python3 catcher.py 
 if [ $? -ne 0 ] 
 then
@@ -20,7 +20,7 @@ then
 	python3 output_mover.py 
 	exit 0 
 fi 
-python3 facetalk.py 
+python3 combining.py 
 if [ $? -ne 0 ]; then exit 0; fi 
 cd .. 
 python3 output_mover.py 
