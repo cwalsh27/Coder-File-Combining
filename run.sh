@@ -11,8 +11,7 @@ if [ $? -ne 0 ]; then exit 0; fi
 cd Facetalk 
 python3 catcher.py 
 if [ $? -ne 0 ] 
-then 
-	python3 facetalk.py 
+then  
 	cd .. 
 	python3 output_mover.py 
 	exit 0 
