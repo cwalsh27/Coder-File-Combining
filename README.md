@@ -1,4 +1,6 @@
 # FaceTalk_Combining
+Note: pandas, xlrd, and openpyxl are required (install with pip)
+
 Place the two coder .csv files in the INPUT folder\
 Edit the config file's 2nd and 4th lines to match the study's information*\
 Mac: Type bash run.sh in the console under the folder's directory\
@@ -16,8 +18,6 @@ The program may attempt to fix errors in the coder files, which you can choose t
 The files will only be combined if all errors are fixed\
 After being combined, the trials with disagreements will be displayed, and you can choose whether or not to add each one to the list of recodes\
 Afterwards, a .txt file with the list of recodes will be in the OUTPUT folder
-
-Note: pandas, xlrd, and openpyxl are required
 
 \*FaceTalk has 75 trials\
 WLS has 24 trials\
