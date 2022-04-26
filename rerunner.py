@@ -4,12 +4,14 @@ import shutil
 import sys
 
 if os.name == "nt":
+    num = -1
     sep = "\\"
 else:
+    num = -2
     sep = "/"
 
 # True or false, based on if it's the first time being run in the rerun
-input = sys.argv[-1]
+input = sys.argv[num]
 
 path = os.getcwd()
 if (eval(input)):
