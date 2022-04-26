@@ -47,7 +47,7 @@ def recreate_line(i, look, on, off) -> str:
         error_row += " "
     if i+1 < 100:
         error_row += " "
-    error_row += str(look) + "  "
+    error_row += str(look) + " "
     error_row += str(on) + " "
     if on < 10000:
         error_row +=  " "
@@ -92,6 +92,46 @@ def error_region(i, sheet, row_num) -> str:
         error_region += "\n"
     return error_region
 
+def fix_missing(look: str, i, sheet, set: str) -> bool:
+    def is_close(val1, val2, tolerance) -> bool:
+        diff = val1 - val2
+        return abs(diff) <= tolerance
+    if "1" in sheet.title:
+        other_sheet_index = 1
+    else:
+        other_sheet_index = 0
+    other_sheet = list(wb)[other_sheet_index]
+    other_row_num = 0
+    for row in other_sheet:
+        other_row_num += 1
+        if row[0].value == look:
+            if set == "on" and is_close(row[2].value, sheet[i+1][2].value, 2):
+                print("Suggested fix:\n")
+                print(recreate_line(i, look, row[1].value, sheet[i+1][2].value))
+                print()
+                print("Because other coder has:")
+                print(error_region(other_row_num-1, other_sheet, len(list(other_sheet))))
+                approval = input("\nApprove fix? (y/n)")
+                if approval in ["y", "Y", "yes", "Yes", "YES"]:
+                    sheet[i+1][1].value = row[1].value
+                    return False
+                else:
+                    return True
+            elif set == "off" and is_close(row[1].value, sheet[i+1][1].value, 2):
+                print("Suggested fix:\n")
+                print(recreate_line(i, look, sheet[i+1][1].value, row[2].value))
+                print()
+                print("Because other coder has:")
+                print(error_region(other_row_num-1, other_sheet, len(list(other_sheet))))
+                approval = input("\nApprove fix? (y/n)")
+                if approval in ["y", "Y", "yes", "Yes", "YES"]:
+                    sheet[i+1][2].value = row[2].value
+                    return False
+                else:
+                    return True
+
+    return True
+
 # catches errors, highlights B cells, and indexes trials
 error = False
 for sheet in wb:
@@ -125,7 +165,9 @@ for sheet in wb:
             if not list(row)[1].value:
                 print("\n" + sheet.title + " missing onset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
-                error = True
+                possible_error = fix_missing(list(row)[0].value, i, sheet, "on")
+                if possible_error:
+                    error = True
             if list(row)[2].value:
                 print("\n" + sheet.title + " has offset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
@@ -143,11 +185,15 @@ for sheet in wb:
             if not list(row)[1].value:
                 print("\n" + sheet.title + " missing onset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
-                error = True
+                possible_error = fix_missing(list(row)[0].value, i, sheet, "on")
+                if possible_error:
+                    error = True
             if not list(row)[2].value:
                 print("\n" + sheet.title + " missing offset in row " + str(i+1) + "\n")
                 print(error_region(i, sheet, row_num))
-                error = True
+                possible_error = fix_missing(list(row)[0].value, i, sheet, "off")
+                if possible_error:
+                    error = True
         else:
             print("\n" + sheet.title + " has unrecognized look in row " + str(i+1) + "\n")
             print(error_region(i, sheet, row_num))
