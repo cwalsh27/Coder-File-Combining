@@ -5,7 +5,6 @@ cd Facetalk
 python3 catcher.py 
 if [ $? -ne 0 ] 
 then 
-	python3 facetalk.py 
 	cd .. 
 	python3 rerunner.py False 
 	exit 0 
