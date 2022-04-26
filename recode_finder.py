@@ -69,8 +69,8 @@ def trial_region(trial, wb) -> str:
         # find B
         for row in sheet:
             row_num += 1
-            cell = row[12].value
-            if row[12].value == trial:
+            cell = row[15].value
+            if row[15].value == trial:
                 b_row = row_num - 1
                 break
         # get everything between B and S
@@ -90,8 +90,12 @@ def trial_region(trial, wb) -> str:
                             region += " "
                         if curr_cell < 1000:
                             region += " "
-                elif j == 0:
-                    region += "  "
+                    elif j == 0:
+                        print(curr_cell)
+                        if len(curr_cell) == 1:
+                            region += "  "
+                        else:
+                            region += " "
                 else:
                     region += "      "
             region += "\n"
@@ -104,12 +108,12 @@ def trial_region(trial, wb) -> str:
         first = False
     # combine regions
     length = max(len(region1), len(region2))
-    txt = list(wb)[0].title + "           " + list(wb)[1].title + "\n"
+    txt = list(wb)[0].title + "            " + list(wb)[1].title + "\n"
     for i in range(length):
         try:
             r1 = region1[i]
         except:
-            r1 = "                  "
+            r1 = "                    "
         try:
             r2 = region2[i]
         except:
