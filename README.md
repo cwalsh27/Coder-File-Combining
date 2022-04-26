@@ -4,12 +4,12 @@ Edit the config file's 2nd and 4th lines to match the study's information*\
 Mac: Type bash run.sh in the console under the folder's directory\
 Windows: Run run.bat\
 Check the OUTPUT folder\
-*Use run.bat/sh only the first time for every set of coder files*
+*Use run.bat/sh only the first time for every set of coder files*\
+*Running it again will undo your edits*
 
 If you want to make an edit to the output and then recombine:\
 Mac: Type bash rerun.sh in the console under the folder's directory\
 Windows: Run rerun.bat\
-*Performing the previous step will undo your edits*
 
 Note: pandas, xlrd, and openpyxl are required
 
