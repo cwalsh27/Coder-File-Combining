@@ -3,14 +3,14 @@ py rerunner.py True
 if %errorlevel% neq 0 (
 	pause
 	exit)
-cd Facetalk
+cd combining
 py catcher.py
 if %errorlevel% neq 0 (
 	cd ..
 	py rerunner.py False
 	pause
 	exit)
-py facetalk.py
+py combining.py
 if %errorlevel% neq 0 (
 	pause
 	exit)

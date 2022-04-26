@@ -8,7 +8,7 @@ else:
     sep = "/"
 
 path = os.getcwd()
-input_path = path + "/Facetalk/Input/"
+input_path = path + "/combining/Input/"
 output_path = path + "/OUTPUT/"
 name_path = path + "/INPUT/"
 

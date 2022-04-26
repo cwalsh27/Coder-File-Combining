@@ -15,7 +15,7 @@ dts_output_files = glob.glob(os.path.join(dts_output_path, "*"))
 for file in dts_output_files:
     os.remove(file)
     
-ft_path = path + "/Facetalk/Input/"
+ft_path = path + "/combining/Input/"
 os.chdir(ft_path)
 ft_files = glob.glob(os.path.join(ft_path, "*"))
 for file in ft_files:

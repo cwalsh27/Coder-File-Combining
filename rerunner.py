@@ -5,20 +5,19 @@ import sys
 
 if os.name == "nt":
     sep = "\\"
-    num = 1
 else:
-    num = 2
     sep = "/"
 
 # True or false, based on if it's the first time being run in the rerun
-input = sys.argv[-num]
+input = sys.argv[-1]
+
 path = os.getcwd()
 if (eval(input)):
     input_path = path + "/OUTPUT/"
-    output_path = path + "/Facetalk/Input/"
+    output_path = path + "/combining/Input/"
 else:
     output_path = path + "/OUTPUT/"
-    input_path = path + "/Facetalk/Input/"
+    input_path = path + "/combining/Input/"
 
 # clear folder
 os.chdir(output_path)
