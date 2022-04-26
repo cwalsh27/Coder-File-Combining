@@ -5,12 +5,13 @@ import sys
 
 if os.name == "nt":
     sep = "\\"
+    num = 1
 else:
+    num = 2
     sep = "/"
 
 # True or false, based on if it's the first time being run in the rerun
-input = sys.argv[-1]
-
+input = sys.argv[-num]
 path = os.getcwd()
 if (eval(input)):
     input_path = path + "/OUTPUT/"
