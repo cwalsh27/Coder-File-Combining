@@ -59,7 +59,7 @@ def recreate_line(i, look, on, off) -> str:
     return error_row
 
 def error_region(i, sheet, row_num) -> str:
-    error_region = "\n"
+    error_region = ""
     # handles edge cases (literally)
     if i == 0:
         area = [i, i+1]
