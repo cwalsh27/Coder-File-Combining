@@ -91,7 +91,6 @@ def trial_region(trial, wb) -> str:
                         if curr_cell < 1000:
                             region += " "
                     elif j == 0:
-                        print(curr_cell)
                         if len(curr_cell) == 1:
                             region += "  "
                         else:
