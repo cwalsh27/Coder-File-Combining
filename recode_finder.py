@@ -92,8 +92,6 @@ def trial_region(trial, wb) -> str:
                             region += " "
                     elif j == 0:
                         if len(curr_cell) == 1:
-                            region += "  "
-                        else:
                             region += " "
                 else:
                     region += "      "
@@ -112,7 +110,7 @@ def trial_region(trial, wb) -> str:
         try:
             r1 = region1[i]
         except:
-            r1 = "                    "
+            r1 = "                   "
         try:
             r2 = region2[i]
         except:
