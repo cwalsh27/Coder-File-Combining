@@ -9,7 +9,7 @@ else:
 
 path = os.getcwd()
 input_path = path + "/DatavyuToSupercoder/Output"
-output_path = path + "/Facetalk/Input"
+output_path = path + "/combining/Input"
 files = glob.glob(os.path.join(input_path, "*.xls"))
 
 # gets rid of that weird OUTPUT.DS_S file
