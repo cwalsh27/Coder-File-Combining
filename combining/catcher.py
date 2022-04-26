@@ -111,7 +111,7 @@ def fix_missing(look: str, i, sheet, set: str) -> bool:
                 print("Suggested fix:\n")
                 print(recreate_line(i, look, row[1].value, sheet[i+1][2].value))
                 print()
-                print("Because other coder has:")
+                print("Because other coder has:\n")
                 print(error_region(other_row_num-1, other_sheet, len(list(other_sheet))))
                 approval = input("\nApprove fix? (y/n)")
                 if approval in ["y", "Y", "yes", "Yes", "YES"]:
@@ -123,7 +123,7 @@ def fix_missing(look: str, i, sheet, set: str) -> bool:
                 print("Suggested fix:\n")
                 print(recreate_line(i, look, sheet[i+1][1].value, row[2].value))
                 print()
-                print("Because other coder has:")
+                print("Because other coder has:\n")
                 print(error_region(other_row_num-1, other_sheet, len(list(other_sheet))))
                 approval = input("\nApprove fix? (y/n)")
                 if approval in ["y", "Y", "yes", "Yes", "YES"]:
