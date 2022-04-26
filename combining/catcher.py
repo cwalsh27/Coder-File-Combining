@@ -47,7 +47,9 @@ def recreate_line(i, look, on, off) -> str:
         error_row += " "
     if i+1 < 100:
         error_row += " "
-    error_row += str(look) + " "
+    error_row += look + " "
+    if len(look) == 1:
+        error_row += " "
     error_row += str(on) + " "
     if on < 10000:
         error_row +=  " "
