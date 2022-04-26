@@ -20,7 +20,6 @@ if %errorlevel% neq 0 (
 cd Facetalk
 py catcher.py
 if %errorlevel% neq 0 (
-	py facetalk.py
 	cd ..
 	py output_mover.py
 	pause
