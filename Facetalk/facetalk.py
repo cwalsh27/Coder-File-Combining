@@ -15,7 +15,7 @@ os.chdir(config_path)
 with open('config.txt') as f:
     lines = f.readlines()
 try:
-    study = lines[1][:-1].lower()
+    study = lines[1][:-1].strip().lower()
 except:
     print("No study given in config file. Make sure to put the study type on the second line")
     exit(1)

@@ -22,11 +22,11 @@ try:
 except:
     print("No study given in config file. Make sure to put the study type on the second line")
     exit(1)
-if not study.lower() in ["facetalk", "wls", "awl"]:
+if not study.strip().lower() in ["facetalk", "wls", "awl"]:
     print("Invalid study \"" + study[:-1] + "\" in config file.")
     exit(1)
 try:
-    num_trials = int(lines[3])
+    num_trials = int(lines[3].strip())
 except:
     print("No number of trials in config file. Make sure to put the number of trials on the fourth line")
     exit(1)
