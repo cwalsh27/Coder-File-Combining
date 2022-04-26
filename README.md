@@ -9,7 +9,13 @@ Check the OUTPUT folder\
 
 If you want to make an edit to the output and then recombine:\
 Mac: Type bash rerun.sh in the console under the folder's directory\
-Windows: Run rerun.bat
+Windows: Run rerun.bat\
+Check the OUTPUT folder
+
+The program may attempt to fix errors in the coder files, which you can choose to approve\
+The files will only be combined if all errors are fixed\
+After being combined, the trials with disagreements will be displayed, and you can choose whether or not to add each one to the list of recodes\
+Afterwards, a .txt file with the list of recodes will be in the OUTPUT folder
 
 Note: pandas, xlrd, and openpyxl are required
 
