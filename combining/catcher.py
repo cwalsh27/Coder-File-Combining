@@ -105,7 +105,7 @@ def fix_missing(look: str, i, sheet, set: str) -> bool:
     for row in other_sheet:
         other_row_num += 1
         if row[0].value == look:
-            if set == "on" and is_close(row[2].value, sheet[i+1][2].value, 2):
+            if set == "on" and is_close(row[2].value, sheet[i+1][2].value, 3):
                 print("Suggested fix:\n")
                 print(recreate_line(i, look, row[1].value, sheet[i+1][2].value))
                 print()
@@ -117,7 +117,7 @@ def fix_missing(look: str, i, sheet, set: str) -> bool:
                     return False
                 else:
                     return True
-            elif set == "off" and is_close(row[1].value, sheet[i+1][1].value, 2):
+            elif set == "off" and is_close(row[1].value, sheet[i+1][1].value, 3):
                 print("Suggested fix:\n")
                 print(recreate_line(i, look, sheet[i+1][1].value, row[2].value))
                 print()
