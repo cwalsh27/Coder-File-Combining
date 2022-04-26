@@ -86,6 +86,9 @@ def error_region(i, sheet, row_num) -> str:
                     if cell.value < 1000:
                         error_region += " "
                 error_region += str(cell.value) + " "
+                if cell == row[0]:
+                    if len(cell.value) == 1:
+                        error_region += " "
         error_region += "\n"
     return error_region
 
@@ -108,8 +111,8 @@ for sheet in wb:
             b += 1
             # highlights cells and indexes trials
             row[0].fill = b_fill
-            sheet["M" + str(row_num + 1)] = b
-            sheet["M" + str(row_num + 1)].fill = b_fill
+            sheet["P" + str(row_num + 1)] = b
+            sheet["P" + str(row_num + 1)].fill = b_fill
         if row[0].value == "S":
             s += 1
         row_num += 1
