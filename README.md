@@ -23,4 +23,4 @@ Afterwards, a .txt file with the list of recodes will be in the OUTPUT folder
 WLS has 24 trials\
 AWL has 96 (V1) or 32 (V2) trials
 
-Disclaimer: I did not make the DatavyuToSupercoder files and most of the code for combining.py
+Disclaimer: I did not make the DatavyuToSupercoder files or most of the code for combining.py
