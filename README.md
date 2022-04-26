@@ -12,6 +12,6 @@ Performing the previous step will undo your edits
 
 Note: pandas, xlrd, and openpyxl are required
 
-\*Facetalk has 75 trials\
+\*FaceTalk has 75 trials\
 WLS has 24 trials\
 AWL has 96 (V1) or 32 (V2) trials
