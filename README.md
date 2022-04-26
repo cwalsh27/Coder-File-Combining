@@ -1,6 +1,6 @@
 # FaceTalk_Combining
 Place the two coder .csv files in the INPUT folder\
-Edit the config file's 2nd and 4th lines to match the study's information\
+Edit the config file's 2nd and 4th lines to match the study's information*\
 Mac: Type bash run.sh in the console under the folder's directory\
 Windows: Run run.sh\
 Check the OUTPUT folder
@@ -11,3 +11,7 @@ Windows: Run rerun.sh\
 Performing the previous step will undo your edits
 
 Note: pandas, xlrd, and openpyxl are required
+
+\*Facetalk has 75 trials\
+WLS has 24 trials\
+AWL has 96 (V1) or 32 (V2) trials
