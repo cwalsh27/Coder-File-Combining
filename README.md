@@ -24,3 +24,5 @@ WLS has 24 trials\
 AWL has 96 (V1) or 32 (V2) trials
 
 Disclaimer: I did not make the DatavyuToSupercoder files or most of the code for combining.py
+
+Detailed documentation can be found at https://docs.google.com/document/d/1Jf_brgiBGb9W7MyF3SSILPgEbyqWEapZw3UfH5-P3RQ/edit?usp=sharing
