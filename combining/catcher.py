@@ -115,6 +115,9 @@ def fix_missing(look: str, i, sheet, set: str) -> bool:
                 print(error_region(other_row_num-1, other_sheet, len(list(other_sheet))))
                 approval = input("\nApprove fix? (y/n)")
                 if approval in ["y", "Y", "yes", "Yes", "YES"]:
+                    sheet[i+1][1].fill = PatternFill(start_color = 'FF0000',
+                                end_color = 'FF0000',
+                                fill_type = 'solid')
                     sheet[i+1][1].value = row[1].value
                     return False
                 else:
@@ -127,6 +130,9 @@ def fix_missing(look: str, i, sheet, set: str) -> bool:
                 print(error_region(other_row_num-1, other_sheet, len(list(other_sheet))))
                 approval = input("\nApprove fix? (y/n)")
                 if approval in ["y", "Y", "yes", "Yes", "YES"]:
+                    sheet[i+1][2].fill = PatternFill(start_color = 'FF0000',
+                                end_color = 'FF0000',
+                                fill_type = 'solid')
                     sheet[i+1][2].value = row[2].value
                     return False
                 else:
@@ -178,10 +184,11 @@ for sheet in wb:
                 print(recreate_line(i, list(row)[0].value, list(row)[1].value, ""))
                 approval = input("\nApprove fix? (y/n)")
                 if approval in ["y", "Y", "yes", "Yes", "YES"]:
+                    list(row)[2].fill = PatternFill(start_color = 'FF0000',
+                                end_color = 'FF0000',
+                                fill_type = 'solid')
                     list(row)[2].value = ""
                 else:
-                    if approval == "cookie":
-                        print("Congrats! You win a cookie!")
                     error = True
         elif list(row)[0].value in ["R", "L", "C", "RT", "RB", "LT", "LB"]:
             if not list(row)[1].value:
