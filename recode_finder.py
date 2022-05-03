@@ -19,6 +19,8 @@ except:
 if not study.strip().lower() in ["facetalk", "wls", "awl"]:
     print("Invalid study \"" + study + "\" in config file.")
     exit(1)
+else:
+    study = study.strip().lower()
 try:
     num_trials = int(lines[3].strip())
 except:
