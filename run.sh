@@ -1,6 +1,6 @@
 #!/bin/bash
-echo Note: this file should only be run once per set of coder files
-echo If you want to edit the output and run again, use rerun.bat
+echo Note: this file should only be run once per set of coder files 
+echo If you want to edit the output and run again, use rerun.sh 
 echo --------------------------------------------------------------
 python3 clearer.py 
 if [ $? -ne 0 ]; then exit 0; fi 
