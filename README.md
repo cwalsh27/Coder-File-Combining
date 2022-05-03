@@ -1,4 +1,4 @@
-# FaceTalk_Combining
+# Coder File Combining
 Note: pandas, xlrd, and openpyxl are required (install with pip)
 
 Place the two coder .csv files in the INPUT folder\
