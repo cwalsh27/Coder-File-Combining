@@ -3,6 +3,8 @@ import glob
 
 path = os.getcwd()
 
+# pretty much just removes everything from the folders, including ignoreMe.txt
+
 dts_input_path = path + "/DatavyuToSuperCoder/Input/"
 os.chdir(dts_input_path)
 dts_input_files = glob.glob(os.path.join(dts_input_path, "*"))
@@ -29,6 +31,7 @@ for file in output_files:
     
 input_path = path + "/INPUT/"
 os.chdir(input_path)
+# only removes ignoreMe.txt from the INPUT folder (the .csv inputs stay)
 input_ignore = glob.glob(os.path.join(input_path, "*txt"))
 if input_ignore:
     os.remove(input_ignore[0])

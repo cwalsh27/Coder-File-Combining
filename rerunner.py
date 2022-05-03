@@ -3,6 +3,7 @@ import glob
 import shutil
 import sys
 
+# differences between Windows and Mac
 if os.name == "nt":
     num = -1
     sep = "\\"

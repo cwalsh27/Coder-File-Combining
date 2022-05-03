@@ -9,6 +9,7 @@ if os.name == "nt":
 else:
     sep = "/"
 
+# gets the study information
 with open('config.txt') as f:
     lines = f.readlines()
 try:
@@ -26,7 +27,6 @@ try:
 except:
     print("No number of trials in config file. Make sure to put the number of trials on the fourth line")
     exit(1)
-
 if study in ["facetalk", "wls"]:
     cols = 15
 elif study in ["awl"]:
@@ -50,6 +50,7 @@ trial_times = trials_wb["Start Time (in elapsed time - Datavyu coding)"]
 bad_trials = set()
 redFill = PatternFill(start_color = 'FF0000', end_color = 'FF0000', fill_type = 'solid')
 redFill2 = PatternFill(start_color = 'FFFF0000', end_color = 'FFFF0000', fill_type = 'solid')
+# find the trials marked red
 for i in range(1, num_trials+1):
     row = output_sheet[i]
     for j in range(0, cols):
@@ -59,6 +60,7 @@ for i in range(1, num_trials+1):
 
 print("\n" + str(len(bad_trials)) + " possible recodes found")
 
+# gets the lines that make up a trial
 def trial_region(trial, wb) -> str:
     region1 = ""
     region2 = ""
@@ -119,7 +121,7 @@ def trial_region(trial, wb) -> str:
             r2 = ""
         txt += r1 + "   " + r2 + "\n"
     return txt
-
+# asks for user input to decide if each trial should be added to the list of recodes
 recodes = set()
 for trial in sorted(bad_trials):
     print("\nDisagreement between coders detected in trial " + str(trial) + ":")
