@@ -35,5 +35,3 @@ os.chdir(input_path)
 input_ignore = glob.glob(os.path.join(input_path, "*txt"))
 if input_ignore:
     os.remove(input_ignore[0])
-
-clear()
