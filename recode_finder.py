@@ -17,7 +17,7 @@ try:
 except:
     print("No study given in config file. Make sure to put the study type on the second line")
     exit(1)
-if not study.strip().lower() in ["facetalk", "wls", "awl"]:
+if not study.strip().lower() in ["facetalk", "wls", "awl", "ewl"]:
     print("Invalid study \"" + study + "\" in config file.")
     exit(1)
 else:
@@ -31,6 +31,8 @@ if study in ["facetalk", "wls"]:
     cols = 15
 elif study in ["awl"]:
     cols = 21
+elif study in ["ewl"]:
+    cols = 23
 
 path = os.getcwd()
 input_path_1 = path + "/OUTPUT/"
@@ -46,6 +48,9 @@ output_sheet = list(list(output_wb)[2])
 os.chdir(input_path_2)
 trials_wb = read_excel(trials_file, skiprows=[0])
 trial_times = trials_wb["Start Time (in elapsed time - Datavyu coding)"]
+
+
+
 
 bad_trials = set()
 redFill = PatternFill(start_color = 'FF0000', end_color = 'FF0000', fill_type = 'solid')
@@ -73,12 +78,12 @@ def trial_region(trial, wb) -> str:
         # find B
         for row in sheet:
             row_num += 1
-            cell = row[15].value
-            if row[15].value == trial:
+            cell = row[17].value
+            if row[17].value == trial:
                 b_row = row_num - 1
                 break
         # get everything between B and S
-        for i in range(b_row, len(sheet)):
+        for i in range(b_row, len(sheet)):               #second error
             cell = sheet[i][0].value
             region += str(i+1) + " "
             if i+1 < 100:
@@ -125,7 +130,7 @@ def trial_region(trial, wb) -> str:
 recodes = set()
 for trial in sorted(bad_trials):
     print("\nDisagreement between coders detected in trial " + str(trial) + ":")
-    print(trial_region(trial, output_wb)[:-1])
+    print(trial_region(trial, output_wb)[:-1])                                     #first error
     decision = None
     while(not decision in ("1", "2", "3", "4")):
         decision = input("""
@@ -147,6 +152,8 @@ If you would like to add all trials to the list of recodes, type 4 """)
         break
 
 txt = "Recodes:\n"
+
+    
 for trial in sorted(recodes):
     time = trial_times[trial-1]
     txt += str(trial) + " (" + time + "), "
