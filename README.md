@@ -21,7 +21,7 @@ Afterwards, a .txt file with the list of recodes will be in the OUTPUT folder
 
 \*FaceTalk has 75 trials\
 WLS has 24 trials\
-AWL has 96 (V1) or 32 (V2) trials
+AWL has 96 (V1) or 32 (V2) trials\
 EWL has 48 (V1) or 24 (V2) trials
 
 Detailed documentation can be found at https://docs.google.com/document/d/1ndhvgzmldLIpR-WoGMdyXUBLT8GqLlnrd3gSThL28CU/edit?usp=sharing
